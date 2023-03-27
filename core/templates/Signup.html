@@ -1,0 +1,119 @@
+{% extends 'headers.html' %}
+
+{% block title %}
+    SignUp today
+{% endblock  %}
+
+{% block main_cont %}
+<body>
+    {% include 'nav.html' %}
+
+
+
+    <!-- page content -->
+    <div class="w-[100vw] h-[100vh] px-5 auth-bg flex-centered bg-gray-400">
+
+        <!-- form wrapper -->
+        <div class="p-6 md:w-[50%] w-full min-h-[50%] max-w-[500px] form-cont rounded-2xl">
+            <h5 class="text-center mb-5 text-white">SignUp Now</h5>
+
+
+            
+
+
+            <!-- error messages -->
+
+            <!-- display when message is sent succesfully -->
+            <p id="success_info" class="text-red text-center hidden text-green-400 mb-4">Message Sent Succesfully</p>
+            <!-- if an error occurs -->
+            {% for i in messages %}
+
+            <p id="error_info" class="text-red text-center font-bold text-red-800 mb-4">{{i|title}}</p>
+            {% endfor %}
+
+            
+            <!-- form content -->
+            <form action="" method="POST">
+              {% csrf_token %}
+
+                <!-- username -->
+                <div class="md:flex md:items-center mb-6">
+                    <label class="block text-gray-700 text-sm w-48 font-bold mr-2 mb-2" for="username">
+                        Username:
+                      </label>
+                    <input onchange="open_info_bx()" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" name="username" placeholder="Type desired in username here">
+                </div>
+
+                <!-- email -->
+                <div class="md:flex md:items-center mb-6">
+                    <label class="block text-gray-700 w-48 text-sm font-bold mr-2 mb-2" for="username">
+                        Contact-info:
+                      </label>
+                    <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" name="contact" placeholder="Type your email address or phone number">
+                </div>
+
+
+                <!-- password -->
+                <div class="md:flex md:items-center mb-6">
+                    <label class="block text-gray-700 w-48 text-sm font-bold mr-2 mb-2" for="username">
+                        Password:
+                      </label>
+                    <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="password" name="password1" placeholder="Choose your password">
+                </div>
+                
+
+
+                <!-- confirm  password -->
+                <div class="md:flex md:items-center mb-6">
+                    <label class="block text-gray-700 w-48 text-sm font-bold mr-2 mb-2" for="username">
+                        Confirm Password:
+                      </label>
+                    <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-1 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="password" name="password2" placeholder="Confirm your Password">
+                </div>
+
+                <div class="md:flex md:items-center mb-6">
+                    <label class="md:w-2/3 block text-gray-100 font-bold">
+                      <input class="mr-2 leading-tight" checked type="checkbox">
+                      <span class="text-sm w-full">
+                        Reply my message via emails!!!
+                      </span>
+                    </label>
+                  </div>
+                <input value="Submit" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white mb-7 py-2 px-2 rounded" type="submit">
+                
+
+                <p class="text-sm text-center text-white">
+                   Have an Account already.. <a href="{% url 'login' %}" class="text-blue-600">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div id="warning" role="alert" class="fixed -translate-x-2/4 w-[90%] max-w-lg  hidden left-[50%] top-1/3  z-10">
+        <div class="bg-indigo-900 text-white font-bold  rounded-t px-4 py-2">
+          Before You Continue
+          <span onclick="close_info_bx()" class="float-right cursor-pointer text-2xl">&times;</span>
+        </div>
+        <div class="border border-t-0 border-indigo-500 rounded-b bg-indigo-500 px-4 py-3 text-white">
+          <p>Please enter a valid contact information else we wont be able to reply your messages</p>
+        </div>
+      </div>
+
+
+
+
+
+      <script>
+        const modal = document.getElementById('warning');
+        
+        function close_info_bx() {
+            modal.style.display='none'
+        }
+
+        function open_info_bx() {
+            modal.style.display='block'
+        }
+      </script>
+</body>
+</html>
+{% endblock main_cont %}

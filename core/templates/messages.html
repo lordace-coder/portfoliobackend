@@ -1,0 +1,53 @@
+{% extends 'headers.html' %}
+
+{% block title %}
+  Admin Messages
+{% endblock title %}
+
+
+
+{% block main_cont %}
+<body class="bg-indigo-600">
+  <main  class="px-5 w-full text-white py-4 min-h-[500px] transition-all duration-1000 ">
+          <div class="bg-indigo-900 h-[20vh] min-h-[120px] px-5 py-4 ml-0 rounded-xl">
+              <div class="flex justify-between">
+                          <span class=" text-3xl cursor-pointer dashboard_btn">Messages</span>
+              <h5 class=" cursor-pointer">
+                  <i class="fa fa-user rounded-full border-white border-2 p-2"></i>
+                  {{user.username}}</h5>
+              
+              </div>
+              <div class="flex justify-between">
+                  <a href="{% url 'admin' %}">
+                      <button class="block btn bg-blue-500 hover:scale-110 transition-all duration-300 font-bold mt-4"><i class="fa fa-home"></i> Return</button>    
+                  </a>
+
+
+                  <a href="{% url 'clear_all' user.id %}">
+                    <button class="block btn bg-red-500 hover:scale-110 transition-all duration-300 font-bold mt-4"><i class="fa fa-trash"></i> Delete</button> 
+                  </a>
+
+
+                 <a href="mailto:{{user.email}}">
+                    <button class="block btn bg-green-500 hover:scale-110 transition-all duration-300 font-bold mt-4"><i class="fa fa-inbox"></i> Reply</button>    
+                 </a>
+              </div>
+         </div>
+
+         <!-- for the messages -->
+         <div class="flex flex-col mt-20 max-w-fit gap-5">
+          {% for msg in messages %}
+            <span class="bg-indigo-900 py-4 w-fit max-w-md px-4 rounded-2xl">
+            <span>{{msg.msg_txt}}</span>
+            {% comment %} <p class="block text-sm font-thin text-gray-200 text-right mt-2">2:10</p> {% endcomment %}
+            </span>
+          {% endfor %}
+
+
+              
+         </div>
+
+  </main>
+</body>
+</html>
+{% endblock main_cont %}

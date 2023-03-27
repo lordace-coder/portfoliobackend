@@ -1,0 +1,17 @@
+super users account credentials
+
+acct name = lordAdmin
+password :lordAdmin
+
+
+
+normal bot account for testing security....Note: to be deleted after development
+username:CHATbot
+password:Chatxbotx
+
+status:deleted
+
+
+
+TO DO LIST:
+   1. add a button to the admin panel "delete all" that allows the admin to  delete all the messages related to a selected user

@@ -1,0 +1,96 @@
+{% extends 'headers.html' %}
+
+{% block title %}
+  Admin Section
+{% endblock title %}
+
+
+
+{% block main_cont %}
+<body class="bg-indigo-600">
+
+  <!--dash board bar-->
+  <nav class="absolute transition-all -left-full md:left-0  duration-1000  flex gap-[20vh] py-6 flex-col w-[35%] max-w-[300px] shadow-2xl bg-indigo-900 rounded-r-3xl h-full">
+      <h5 class="text-white text-center">LordAceMedia <span class="dashboard_close text-3xl md:hidden cursor-pointer">&times;</span> </h5>
+
+      <ul class="flex text-white text-xl text-center mt-6 w-full flex-col gap-6 md:gap-16">
+          <li><a href="{% url 'index' %}">HomePage</a></li>
+          <li><a href="javascript:void(0)" onclick="open_tab(event,'messages')">Messages</a></li>
+          <li class="cursor-pointer" onclick="open_tab(event,'dashboard')">DashBoard</li>
+      </ul>
+  </nav>
+  
+
+  <main class="px-5  py-4 main min-h-[500px] transition-all duration-1000 ">
+
+      <div id="dashboard" class="tabcontent">
+           <div class="bg-indigo-900 h-[20vh] min-h-[120px] px-5 py-4 rounded-xl">
+               <span class="text-white text-3xl cursor-pointer dashboard_btn">☰ Dashboard</span>
+          </div>
+
+           <div class="flex flex-wrap mt-8 align-middle justify-center md-gap-0 gap-7 md:justify-between h-[20vh] min-h-[120px] px-5 py-4">
+              <div class="board transition-all duration-600 hover:scale-105">Urls <br>{{no_of_pages}} </div>
+
+              <div class="board transition-all duration-600 hover:scale-105">Users <br>{{no_of_users}}</div>
+
+              <div class="board  transition-all duration-600 hover:scale-105">Messages <br>{{messages}}</div>
+
+              <div class="board transition-all duration-600 hover:scale-105">Projects <br> coming soon </div>
+          </div>
+      </div>
+
+
+
+
+
+      <div id="messages" class="tabcontent w-full h-[90vh]">
+          <div class="bg-indigo-900 h-[20vh] min-h-[120px] px-5 py-4 rounded-xl">
+              <span class="text-white text-3xl cursor-pointer dashboard_btn">☰ Messages</span>
+         </div>
+          <div class="bg-indigo-700 max-h-[40%] py-3 rounded-md text-white mt-10 w-full px-3 mx-auto md:w-[70%] overflow-y-auto">
+
+            {% for key,value in senders_names.items %}
+                <a href="{% url 'messages' key.id %}">
+                    <div class="py-3 w-full bg-indigo-900 flex mb-5 rounded-full justify-between px-8">
+                        <h5 class="cursor-pointer">{{key}}</h5>    
+                        <span class="alert">{{value}}</span>
+                    </div>
+                </a>
+            {% endfor %}
+            {% if not senders_names %}
+            <h4 class="text-center">No Messages</h4>
+            {% endif %}     
+          </div>
+      </div>
+     
+  </main>
+
+<script>
+    function open_tab(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+        
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        }
+        
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+        } 
+        open_tab(event,'dashboard')
+    
+        
+</script>
+
+</body>
+</html>
+{% endblock main_cont %}

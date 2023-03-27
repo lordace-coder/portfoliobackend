@@ -1,0 +1,37 @@
+The purpose of writing this app was to help other programmers be able of handling this problem with ease
+
+delete accounts that make malicious attempts on your website
+Note:
+    this app doesnt spot malicious attempts on its own
+    call this function after defining a malicious attempt youself and inside your view
+    E.g:
+        
+   """  if request.user.is_superuser:
+            #somecode
+        else:
+            return spot_mal_and_act(request.user)"""
+
+SETTING UP THE APP:
+    1.first go to your projects settings.py and include the app
+
+    INSTALLED_APPS = [
+        ...
+        'blocker'
+    ]
+
+    2.run this in your project directory
+        python manage.py makemigrations
+        python manage.py migrate
+    
+    3.in your views.py add this import statements
+        from blocker.security import spot_mal_and_act,set_home_page
+    
+    4.set your return or homepage
+        your homepage or default page in this case means the page that users will be lead to after any malicous attempt
+        this should probably be the last line of code in your views.py
+
+
+        target = url_name
+        set_home_page(target)
+
+        target in this case should be the name of a url

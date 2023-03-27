@@ -1,0 +1,28 @@
+<nav class="flex  justify-between fixed z-10 md:absolute top-0 w-full items-center text-white px-3 py-5">
+    <h5 class="">
+        <a href="{% url 'index' %}">LordAceMedia</a>
+    </h5>
+
+    <ul class="nav -right-52">
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'projects' %}">Projects</a></li>
+
+
+        {% if request.user.is_superuser %}
+            <li><a href="{% url 'admin' %}">Manage<br> Website</a></li>
+        {% endif %}
+
+
+
+        {% if request.user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
+    </ul>
+
+    <span class="md:hidden z-10">
+        <i id="navbtn" class="fa fa-bars cursor-pointer"></i>
+    </span>
+</nav>
