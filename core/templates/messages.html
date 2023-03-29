@@ -37,9 +37,12 @@
          <!-- for the messages -->
          <div class="flex flex-col mt-20 max-w-fit gap-5">
           {% for msg in messages %}
-            <span class="bg-indigo-900 py-4 w-fit max-w-md px-4 rounded-2xl">
+            <span class="msg_block">
             <span>{{msg.msg_txt}}</span>
             {% comment %} <p class="block text-sm font-thin text-gray-200 text-right mt-2">2:10</p> {% endcomment %}
+                    <div class="text-right close_btn">
+                    <a href="{% url 'delete_msg' msg.id %}">&times;</a>
+                  </div>
             </span>
           {% endfor %}
 

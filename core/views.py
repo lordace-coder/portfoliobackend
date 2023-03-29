@@ -125,7 +125,6 @@ def get_admin_page(request):
                 senders_names[msg.senders_name]=1
             else:
                 senders_names[msg.senders_name]+=1
-        print(senders_names)
         context = {
             'no_of_pages':len(urls.urlpatterns),
             'messages':total_msg_count,
@@ -161,8 +160,10 @@ def delete_msg(request,id =None):
         ...
     else:
         msg = Users_messages.objects.get(id=id)
+        temp = msg
         msg.delete()
-    return redirect('../')
+        id_for_url = temp.senders_name.id
+    return redirect('messages' ,user_id=id_for_url)
 
 
 
